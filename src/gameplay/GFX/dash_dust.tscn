@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://tu4hxlyd6ki5"]
+
+[ext_resource type="Texture2D" uid="uid://qacm6yij44gl" path="res://assets/vfx/Smoke VFX 1.png" id="1_lfcc2"]
+[ext_resource type="Script" uid="uid://ca4050ykowaqu" path="res://src/scripts/instantiator.gd" id="2_h6hwe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hd1x8"]
+atlas = ExtResource("1_lfcc2")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ud0ju"]
+atlas = ExtResource("1_lfcc2")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jpw4"]
+atlas = ExtResource("1_lfcc2")
+region = Rect2(96, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skxxx"]
+atlas = ExtResource("1_lfcc2")
+region = Rect2(144, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flq2f"]
+atlas = ExtResource("1_lfcc2")
+region = Rect2(192, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o62ih"]
+atlas = ExtResource("1_lfcc2")
+region = Rect2(240, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmqc3"]
+atlas = ExtResource("1_lfcc2")
+region = Rect2(288, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rja2c"]
+atlas = ExtResource("1_lfcc2")
+region = Rect2(336, 0, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gvu6n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hd1x8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ud0ju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jpw4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skxxx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flq2f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o62ih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmqc3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rja2c")
+}],
+"loop": 1,
+"name": &"dash_dush",
+"speed": 11.0
+}]
+
+[node name="Gfx" type="AnimatedSprite2D" unique_id=1839673454]
+sprite_frames = SubResource("SpriteFrames_gvu6n")
+animation = &"dash_dush"
+autoplay = "dash_dush"
+frame_progress = 0.14247477
+offset = Vector2(-24, -15.69)
+script = ExtResource("2_h6hwe")

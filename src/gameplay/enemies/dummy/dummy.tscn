@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://d0ar2xoni3kv1"]
+
+[ext_resource type="Script" uid="uid://dwjmtv1jtuaht" path="res://src/gameplay/enemies/dummy/dummy.gd" id="1_vtm3b"]
+[ext_resource type="Shader" uid="uid://cwylou0wmsgtr" path="res://src/scripts/shaders/hitEffect.gdshader" id="2_u4rr0"]
+[ext_resource type="Texture2D" uid="uid://d3gwv1stp7xsl" path="res://icon.svg" id="2_vtm3b"]
+[ext_resource type="Script" uid="uid://doejhfgthu4ky" path="res://addons/finite_state_machine/finite_state_machine.gd" id="4_d3lym"]
+[ext_resource type="Script" uid="uid://cda3rtkqsxlg7" path="res://src/gameplay/enemies/dummy/netral.gd" id="5_gfpbe"]
+[ext_resource type="Script" uid="uid://cea5rmtnyqji2" path="res://src/gameplay/enemies/dummy/hitted.gd" id="6_4udgv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_20cm6"]
+size = Vector2(20, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vtm3b"]
+size = Vector2(20, 48)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m7y2m"]
+shader = ExtResource("2_u4rr0")
+shader_parameter/hit_effect = 0.0
+shader_parameter/shake_intensity = 10.0
+shader_parameter/flash_speed = 60.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+
+[node name="Dummy" type="CharacterBody2D" unique_id=1187717198]
+script = ExtResource("1_vtm3b")
+metadata/_custom_type_script = "uid://cw7euhbfyl5dl"
+
+[node name="hurtbox" type="Area2D" parent="." unique_id=663451952 groups=["enemy_hurtbox"]]
+collision_layer = 64
+collision_mask = 4
+
+[node name="hurtbox_shape" type="CollisionShape2D" parent="hurtbox" unique_id=196587934 groups=["enemy_hurtbox"]]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_20cm6")
+debug_color = Color(0.98571664, 0, 0.3356445, 0.41960785)
+
+[node name="body" type="CollisionShape2D" parent="." unique_id=1559784701]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_vtm3b")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1100282311]
+material = SubResource("ShaderMaterial_m7y2m")
+position = Vector2(2.3841858e-07, -24)
+scale = Vector2(0.171875, 0.375)
+texture = ExtResource("2_vtm3b")
+
+[node name="upper_point" type="Node2D" parent="." unique_id=380606428]
+position = Vector2(0, -56)
+
+[node name="instantiate_here" type="Node" parent="." unique_id=495732684]
+
+[node name="mid_point" type="Node2D" parent="instantiate_here" unique_id=131084051]
+position = Vector2(0, -24)
+
+[node name="dummy_fsm" type="Node" parent="." unique_id=211635293 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_d3lym")
+initial_state = NodePath("netral")
+metadata/_custom_type_script = "uid://doejhfgthu4ky"
+
+[node name="netral" type="Node" parent="dummy_fsm" unique_id=2012464997]
+script = ExtResource("5_gfpbe")
+metadata/_custom_type_script = "uid://2y37yx57ooc4"
+
+[node name="hitted" type="Node" parent="dummy_fsm" unique_id=1162274161]
+script = ExtResource("6_4udgv")
+metadata/_custom_type_script = "uid://2y37yx57ooc4"
+
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
