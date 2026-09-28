@@ -24,4 +24,7 @@ func physics_update(delta: float)->void:
 		player.velocity.y -= ADDITIONAL_FORCE_WHEN_HOLD_JUMP
 	if Input.is_action_just_pressed("attack"):
 		fsm.transition("air_melee")
+		
+	if player.is_on_wall() and sign(player.move_input) == -player.get_wall_normal():
+		fsm.transition("wall_slide")
 	player.flip_player()

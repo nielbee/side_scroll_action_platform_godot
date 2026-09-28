@@ -4,14 +4,17 @@ extends State
 @onready var sprite: AnimatedSprite2D = %sprite
 @onready var fsm: FiniteStateMachine = %FSM
 
+const GESEKAN := 18
 
 func enter()->void:
-	sprite.play("jump_loop")
-
+	sprite.play("wall_slide")
 
 
 func physics_update(delta: float)->void:
+	player.velocity.y = GESEKAN
+	if Input.is_action_just_pressed("move_down"):
+		fsm.transition("fall")
+	if Input.is_action_just_pressed("jump"):
+		fsm.transition("wall_jump")
 	if player.is_on_floor():
 		fsm.transition("idle")
-	if player.is_on_wall() and sign(player.move_input) == -player.get_wall_normal():
-		fsm.transition("wall_slide")

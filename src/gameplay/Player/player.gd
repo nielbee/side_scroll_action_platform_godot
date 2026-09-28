@@ -64,4 +64,5 @@ func _setLastDir():
 func _hitting_enemy(area: Area2D) -> void:
 	if area.owner is EnemyBody:
 		#playSound(sword_collided)
-		camera_2d.set_shake(0.1 * (total_damage/ 0.2) ,0.5)
+		#camera_2d.set_shake(0.1 * (total_damage/ 0.2) ,0.5)
+		pass

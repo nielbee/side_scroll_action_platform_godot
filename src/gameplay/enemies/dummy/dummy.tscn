@@ -43,13 +43,13 @@ position = Vector2(2.3841858e-07, -24)
 scale = Vector2(0.171875, 0.375)
 texture = ExtResource("2_vtm3b")
 
-[node name="upper_point" type="Node2D" parent="." unique_id=380606428]
-position = Vector2(0, -56)
-
 [node name="instantiate_here" type="Node" parent="." unique_id=495732684]
 
 [node name="mid_point" type="Node2D" parent="instantiate_here" unique_id=131084051]
 position = Vector2(0, -24)
+
+[node name="upper_point" type="Node2D" parent="instantiate_here" unique_id=380606428]
+position = Vector2(0, -56)
 
 [node name="dummy_fsm" type="Node" parent="." unique_id=211635293 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_d3lym")

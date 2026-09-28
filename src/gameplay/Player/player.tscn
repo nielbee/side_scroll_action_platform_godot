@@ -15,6 +15,8 @@
 [ext_resource type="Script" uid="uid://bx2iftgib73w7" path="res://src/gameplay/Player/jump.gd" id="10_bu8hc"]
 [ext_resource type="Script" uid="uid://kc110gdaipwn" path="res://src/scripts/camera_shake.gd" id="11_gs243"]
 [ext_resource type="Script" uid="uid://drwcpi774caao" path="res://src/gameplay/Player/air_melee.gd" id="11_m7y2m"]
+[ext_resource type="Script" uid="uid://bncfflmk687q6" path="res://src/gameplay/Player/wall_hang.gd" id="12_y3de3"]
+[ext_resource type="Script" uid="uid://cskxfip4wn2jt" path="res://src/gameplay/Player/wall_jump.gd" id="13_4offs"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_20cm6"]
 radius = 5.0
@@ -704,6 +706,14 @@ metadata/_custom_type_script = "uid://2y37yx57ooc4"
 
 [node name="air_melee" type="Node" parent="FSM" unique_id=736068256]
 script = ExtResource("11_m7y2m")
+metadata/_custom_type_script = "uid://2y37yx57ooc4"
+
+[node name="wall_slide" type="Node" parent="FSM" unique_id=2114851675]
+script = ExtResource("12_y3de3")
+metadata/_custom_type_script = "uid://2y37yx57ooc4"
+
+[node name="wall_jump" type="Node" parent="FSM" unique_id=1744412419]
+script = ExtResource("13_4offs")
 metadata/_custom_type_script = "uid://2y37yx57ooc4"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1811038896]
