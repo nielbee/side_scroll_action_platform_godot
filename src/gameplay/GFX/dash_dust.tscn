@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://tu4hxlyd6ki5"]
 
 [ext_resource type="Texture2D" uid="uid://qacm6yij44gl" path="res://assets/vfx/Smoke VFX 1.png" id="1_lfcc2"]
-[ext_resource type="Script" uid="uid://ca4050ykowaqu" path="res://src/scripts/instantiator.gd" id="2_h6hwe"]
+[ext_resource type="Texture2D" uid="uid://dej3y6w1o1dbu" path="res://assets/vfx/Smoke VFX 2.png" id="2_h6hwe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hd1x8"]
 atlas = ExtResource("1_lfcc2")
@@ -35,6 +35,10 @@ region = Rect2(288, 0, 48, 32)
 atlas = ExtResource("1_lfcc2")
 region = Rect2(336, 0, 48, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4re5"]
+atlas = ExtResource("2_h6hwe")
+region = Rect2(806, 0, 26, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_gvu6n"]
 animations = [{
 "frames": [{
@@ -61,16 +65,22 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rja2c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4re5")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"dash_dush",
-"speed": 11.0
+"speed": 20.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"new_animation",
+"speed": 5.0
 }]
 
 [node name="Gfx" type="AnimatedSprite2D" unique_id=1839673454]
 sprite_frames = SubResource("SpriteFrames_gvu6n")
 animation = &"dash_dush"
 autoplay = "dash_dush"
-frame_progress = 0.14247477
 offset = Vector2(-24, -15.69)
-script = ExtResource("2_h6hwe")

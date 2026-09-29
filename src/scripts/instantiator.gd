@@ -2,5 +2,6 @@ extends AnimatedSprite2D
 class_name Instantiator
 
 
-func setPosition(postion : Vector2)->void:
-	global_position = postion
+func _ready() -> void:
+	await animation_finished
+	queue_free()

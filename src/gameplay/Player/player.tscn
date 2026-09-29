@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://drwcpi774caao" path="res://src/gameplay/Player/air_melee.gd" id="11_m7y2m"]
 [ext_resource type="Script" uid="uid://bncfflmk687q6" path="res://src/gameplay/Player/wall_hang.gd" id="12_y3de3"]
 [ext_resource type="Script" uid="uid://cskxfip4wn2jt" path="res://src/gameplay/Player/wall_jump.gd" id="13_4offs"]
+[ext_resource type="Script" uid="uid://c278x5qlr1vg5" path="res://src/gameplay/Player/sliding.gd" id="14_l8r6w"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_20cm6"]
 radius = 5.0
@@ -643,7 +644,8 @@ shape = SubResource("CapsuleShape2D_20cm6")
 [node name="hurtbox_shape" type="CollisionShape2D" parent="hurtbox/hurtbox" unique_id=830269079]
 position = Vector2(0, -10.5)
 shape = SubResource("RectangleShape2D_c346j")
-debug_color = Color(0.1547083, 0.63399374, 0.35236275, 0.41960785)
+disabled = true
+debug_color = Color(0.9843137, 0, 0.36862746, 1)
 
 [node name="hitbox" type="Node2D" parent="." unique_id=455948238]
 
@@ -716,6 +718,10 @@ metadata/_custom_type_script = "uid://2y37yx57ooc4"
 script = ExtResource("13_4offs")
 metadata/_custom_type_script = "uid://2y37yx57ooc4"
 
+[node name="sliding" type="Node" parent="FSM" unique_id=660879432]
+script = ExtResource("14_l8r6w")
+metadata/_custom_type_script = "uid://2y37yx57ooc4"
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1811038896]
 physics_interpolation_mode = 1
 top_level = true
@@ -742,7 +748,7 @@ dead_zone_width = 0.074
 dead_zone_height = 0.221
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
-[node name="instantiating_places" type="Node" parent="." unique_id=1807965813]
+[node name="instantiating_places" type="Node2D" parent="." unique_id=1224885311]
 
 [node name="bottom" type="Node2D" parent="instantiating_places" unique_id=1418654512]
 
