@@ -3,8 +3,13 @@ class_name EnemyBody
 
 
 @export var base_health := 10.0
-
+@export var target : Player
 signal HP_EMPTY
+func _ready() -> void:
+	if target == null:
+		target = get_tree().get_nodes_in_group("PLAYER")[0]
+	#PLAYER_FSM = target.get_player_state_machine()
+
 
 
 func hitstop(duration:float,speed:float)->void:

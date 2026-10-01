@@ -2,13 +2,14 @@ extends CharacterBody2D
 class_name Player
 
 
+@onready var hitbox: Node2D = $hitbox
+@onready var sprite: AnimatedSprite2D = %sprite
+@onready var camera_2d: Camera2D = $Camera2D
+
 
 const FALL_SPEED := 20.0
 const RUN_SPEED:= 80.0
 const JUMP_FORCE := 250.0
-@onready var hitbox: Node2D = $hitbox
-@onready var sprite: AnimatedSprite2D = %sprite
-@onready var camera_2d: Camera2D = $Camera2D
 const SFX_sword_swing = preload("res://assets/sfx/sword_swing.wav")
 const SFX_sword_collided = preload("res://assets/sfx/sword_collided.wav")
 
@@ -16,6 +17,17 @@ const SFX_sword_collided = preload("res://assets/sfx/sword_collided.wav")
 var move_input : Vector2 = Vector2.ZERO
 var lastDirection := 1.0
 var total_damage := 0.0
+
+
+
+#getter()
+
+func get_player_phantom_cam()->PhantomCamera2D:
+	return $PhantomCamera
+func get_player_state_machine()->FiniteStateMachine:
+	return %FSM
+
+#end of getter
 
 func _physics_process(delta: float) -> void:
 	move_input.x = Input.get_axis("move_left","move_right")

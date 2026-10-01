@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 PhantomCameraManager="*uid://duq6jhf6unyis"
+BeehaveGlobalMetrics="*uid://c3ktl6ontsdt7"
+BeehaveGlobalDebugger="*uid://bl3ma400hpvsh"
 
 [display]
 
@@ -28,12 +30,13 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/finite_state_machine/plugin.cfg", "res://addons/log/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/beehave/plugin.cfg", "res://addons/finite_state_machine/plugin.cfg", "res://addons/log/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [global_group]
 
 player_hitbox=""
 enemy_hurtbox=""
+PLAYER=""
 
 [input]
 

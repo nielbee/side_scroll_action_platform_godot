@@ -512,7 +512,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"melee_air_down_landing",
-"speed": 6.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -523,7 +523,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"melee_air_down_loop",
-"speed": 5.0
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -629,8 +629,9 @@ animations = [{
 [sub_resource type="Resource" id="Resource_phkmh"]
 script = ExtResource("7_wdlhl")
 
-[node name="Player" type="CharacterBody2D" unique_id=1372371438]
+[node name="Player" type="CharacterBody2D" unique_id=1372371438 groups=["PLAYER"]]
 collision_layer = 2
+collision_mask = 129
 script = ExtResource("1_qnop1")
 
 [node name="player_body" type="CollisionShape2D" parent="." unique_id=334721153]
@@ -667,9 +668,12 @@ debug_color = Color(0.967573, 0.0646903, 0.4313854, 0.41960785)
 
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1363957666]
 unique_name_in_owner = true
+z_index = 1
+position = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_20cm6")
 animation = &"run"
 autoplay = "idle"
+frame_progress = 0.50760376
 offset = Vector2(0, -17.715)
 
 [node name="FSM" type="Node" parent="." unique_id=1784465518 node_paths=PackedStringArray("initial_state")]
