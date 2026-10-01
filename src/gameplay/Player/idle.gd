@@ -5,6 +5,7 @@ extends State
 
 
 func enter()->void:
+	sprite.material.set("shader_parameter/hit_effect",0)
 	player.velocity.x = 0
 	sprite.play("idle")
 

@@ -2,11 +2,13 @@
 
 [ext_resource type="Script" uid="uid://d3pc1w4n0w17j" path="res://src/gameplay/enemies/deathBringer/death_bringer.gd" id="1_w3qkh"]
 [ext_resource type="Texture2D" uid="uid://cp4l2axkbeg1l" path="res://assets/enemies/Bringer-of-Death-SpritSheet.png" id="2_wgxee"]
+[ext_resource type="Script" uid="uid://cit6m82658so" path="res://src/scripts/custom_node/enemy_hitbox.gd" id="3_2upa1"]
 [ext_resource type="Script" uid="uid://doejhfgthu4ky" path="res://addons/finite_state_machine/finite_state_machine.gd" id="3_4a7oi"]
 [ext_resource type="Script" uid="uid://dsg6u2hh4dqpq" path="res://src/gameplay/enemies/deathBringer/idle.gd" id="4_vtl3b"]
 [ext_resource type="Script" uid="uid://ddqv38dorkmsw" path="res://src/gameplay/enemies/deathBringer/attack.gd" id="5_icy7y"]
 [ext_resource type="Script" uid="uid://br6vi0wdt0agd" path="res://src/gameplay/enemies/deathBringer/chase_player.gd" id="6_icy7y"]
 [ext_resource type="Script" uid="uid://cohjkvq2eqccy" path="res://src/gameplay/enemies/deathBringer/death.gd" id="7_k848m"]
+[ext_resource type="Script" uid="uid://b58gxvnsge4bu" path="res://src/gameplay/enemies/deathBringer/spell.gd" id="8_6h7uq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c647t"]
 atlas = ExtResource("2_wgxee")
@@ -313,9 +315,6 @@ animations = [{
 radius = 40.194386
 height = 134.22787
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c346j"]
-size = Vector2(68, 65)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bdhr"]
 size = Vector2(26, 56)
 
@@ -330,11 +329,15 @@ metadata/_custom_type_script = "uid://cw7euhbfyl5dl"
 
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1384478613]
 sprite_frames = SubResource("SpriteFrames_20cm6")
-animation = &"idle"
+animation = &"attack"
 autoplay = "idle"
+frame = 3
 offset = Vector2(-34.825, -46.455)
 
-[node name="hitbox" type="Area2D" parent="sprite" unique_id=2130592231]
+[node name="hitbox" type="Area2D" parent="sprite" unique_id=2130592231 groups=["enemy_hitbox"]]
+collision_layer = 32
+collision_mask = 8
+script = ExtResource("3_2upa1")
 
 [node name="sword" type="CollisionShape2D" parent="sprite/hitbox" unique_id=1494814765]
 position = Vector2(-27, -35.000004)
@@ -342,13 +345,6 @@ rotation = 1.1278278
 shape = SubResource("CapsuleShape2D_bfuwn")
 disabled = true
 debug_color = Color(0.914673, 0.24218029, 0.41845715, 0.41960785)
-
-[node name="detectionArea" type="Area2D" parent="sprite" unique_id=1646113137]
-
-[node name="attackRange" type="CollisionShape2D" parent="sprite/detectionArea" unique_id=1988873125]
-position = Vector2(-50, -31.5)
-shape = SubResource("RectangleShape2D_c346j")
-debug_color = Color(0.5333617, 0.5703088, 0, 0.41960785)
 
 [node name="hurtbox" type="Area2D" parent="sprite" unique_id=916752803]
 collision_layer = 64
@@ -382,6 +378,10 @@ metadata/_custom_type_script = "uid://2y37yx57ooc4"
 
 [node name="death" type="Node" parent="FSM" unique_id=1037984074]
 script = ExtResource("7_k848m")
+metadata/_custom_type_script = "uid://2y37yx57ooc4"
+
+[node name="spell" type="Node" parent="FSM" unique_id=2009995567]
+script = ExtResource("8_6h7uq")
 metadata/_custom_type_script = "uid://2y37yx57ooc4"
 
 [node name="instantiate_location" type="Node2D" parent="." unique_id=1303867587]

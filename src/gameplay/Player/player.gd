@@ -2,9 +2,15 @@ extends CharacterBody2D
 class_name Player
 
 
+@export var playerHP := 10.0
+
+
+
+
 @onready var hitbox: Node2D = $hitbox
 @onready var sprite: AnimatedSprite2D = %sprite
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var fsm: FiniteStateMachine = %FSM
 
 
 const FALL_SPEED := 20.0
@@ -78,3 +84,16 @@ func _hitting_enemy(area: Area2D) -> void:
 		#playSound(sword_collided)
 		#camera_2d.set_shake(0.1 * (total_damage/ 0.2) ,0.5)
 		pass
+
+
+func _take_damage(damage: float)->void:
+	playerHP-=damage
+	if playerHP < 1:
+		fsm.transition("death")
+
+
+func _on_hurtbox_area_entered(area: EnemyHitboxArea2d) -> void:   # deteksi hit dari enemy
+	if area.is_in_group("enemy_hitbox"):
+		#Log.info(area.givenDamage)
+		_take_damage(area.givenDamage)
+		fsm.transition("hurt")

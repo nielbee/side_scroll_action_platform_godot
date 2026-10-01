@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="side-scroller-action"
-run/main_scene="uid://bjldt0dr80jdr"
+run/main_scene="uid://cksk7kdvh172s"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
 
@@ -37,6 +37,7 @@ enabled=PackedStringArray("res://addons/beehave/plugin.cfg", "res://addons/finit
 player_hitbox=""
 enemy_hurtbox=""
 PLAYER=""
+enemy_hitbox=""
 
 [input]
 

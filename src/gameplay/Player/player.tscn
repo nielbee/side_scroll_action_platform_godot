@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ddvvfut5crvww" path="res://src/gameplay/Player/player.gd" id="1_qnop1"]
 [ext_resource type="Texture2D" uid="uid://nc2umsay31c4" path="res://assets/player/adventurer-v1.5-Sheet.png" id="2_0sdp8"]
+[ext_resource type="Shader" uid="uid://cwylou0wmsgtr" path="res://src/scripts/shaders/hitEffect.gdshader" id="2_45g0x"]
 [ext_resource type="Script" uid="uid://doejhfgthu4ky" path="res://addons/finite_state_machine/finite_state_machine.gd" id="3_w3o8p"]
 [ext_resource type="Script" uid="uid://bf6by11nx2d5w" path="res://src/gameplay/Player/idle.gd" id="4_wabpw"]
 [ext_resource type="Script" uid="uid://cn66g1ccvvgag" path="res://src/gameplay/Player/fall.gd" id="5_p6rqv"]
@@ -18,6 +19,8 @@
 [ext_resource type="Script" uid="uid://bncfflmk687q6" path="res://src/gameplay/Player/wall_hang.gd" id="12_y3de3"]
 [ext_resource type="Script" uid="uid://cskxfip4wn2jt" path="res://src/gameplay/Player/wall_jump.gd" id="13_4offs"]
 [ext_resource type="Script" uid="uid://c278x5qlr1vg5" path="res://src/gameplay/Player/sliding.gd" id="14_l8r6w"]
+[ext_resource type="Script" uid="uid://blvjsav16flqa" path="res://src/gameplay/Player/hurt.gd" id="15_p004p"]
+[ext_resource type="Script" uid="uid://h0oa4y3u43a5" path="res://src/gameplay/Player/death.gd" id="17_leaxb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_20cm6"]
 radius = 5.0
@@ -31,6 +34,13 @@ size = Vector2(25, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bdhr"]
 size = Vector2(12, 32)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mfvdg"]
+shader = ExtResource("2_45g0x")
+shader_parameter/hit_effect = 0.0
+shader_parameter/shake_intensity = 10.0
+shader_parameter/flash_speed = 30.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2cd5h"]
 atlas = ExtResource("2_0sdp8")
@@ -47,6 +57,22 @@ region = Rect2(300, 0, 50, 37)
 [sub_resource type="AtlasTexture" id="AtlasTexture_u3ucd"]
 atlas = ExtResource("2_0sdp8")
 region = Rect2(0, 37, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flyce"]
+atlas = ExtResource("2_0sdp8")
+region = Rect2(150, 296, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ee55l"]
+atlas = ExtResource("2_0sdp8")
+region = Rect2(200, 296, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_020yj"]
+atlas = ExtResource("2_0sdp8")
+region = Rect2(250, 296, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfwvx"]
+atlas = ExtResource("2_0sdp8")
+region = Rect2(300, 296, 50, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_unjv1"]
 atlas = ExtResource("2_0sdp8")
@@ -342,6 +368,23 @@ animations = [{
 "loop": 1,
 "name": &"crouch",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flyce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ee55l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_020yj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfwvx")
+}],
+"loop": 0,
+"name": &"hurt",
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -641,11 +684,12 @@ shape = SubResource("CapsuleShape2D_20cm6")
 [node name="hurtbox" type="Node2D" parent="." unique_id=991638486]
 
 [node name="hurtbox" type="Area2D" parent="hurtbox" unique_id=1131352741]
+collision_layer = 8
+collision_mask = 32
 
 [node name="hurtbox_shape" type="CollisionShape2D" parent="hurtbox/hurtbox" unique_id=830269079]
 position = Vector2(0, -10.5)
 shape = SubResource("RectangleShape2D_c346j")
-disabled = true
 debug_color = Color(0.9843137, 0, 0.36862746, 1)
 
 [node name="hitbox" type="Node2D" parent="." unique_id=455948238]
@@ -669,11 +713,11 @@ debug_color = Color(0.967573, 0.0646903, 0.4313854, 0.41960785)
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1363957666]
 unique_name_in_owner = true
 z_index = 1
+material = SubResource("ShaderMaterial_mfvdg")
 position = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_20cm6")
-animation = &"run"
+animation = &"hurt"
 autoplay = "idle"
-frame_progress = 0.50760376
 offset = Vector2(0, -17.715)
 
 [node name="FSM" type="Node" parent="." unique_id=1784465518 node_paths=PackedStringArray("initial_state")]
@@ -726,6 +770,14 @@ metadata/_custom_type_script = "uid://2y37yx57ooc4"
 script = ExtResource("14_l8r6w")
 metadata/_custom_type_script = "uid://2y37yx57ooc4"
 
+[node name="hurt" type="Node" parent="FSM" unique_id=712996998]
+script = ExtResource("15_p004p")
+metadata/_custom_type_script = "uid://2y37yx57ooc4"
+
+[node name="death" type="Node" parent="FSM" unique_id=992817693]
+script = ExtResource("17_leaxb")
+metadata/_custom_type_script = "uid://2y37yx57ooc4"
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1811038896]
 physics_interpolation_mode = 1
 top_level = true
@@ -756,4 +808,5 @@ metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="bottom" type="Node2D" parent="instantiating_places" unique_id=1418654512]
 
+[connection signal="area_entered" from="hurtbox/hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="area_entered" from="hitbox/hitbox" to="." method="_hitting_enemy"]

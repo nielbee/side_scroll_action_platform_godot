@@ -14,7 +14,6 @@ var distanceToPlayer : Vector2
 
 func _physics_process(delta: float) -> void:
 	distanceToPlayer =target.global_position - global_position
-	
 
 
 

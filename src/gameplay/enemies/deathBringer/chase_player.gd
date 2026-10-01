@@ -3,6 +3,10 @@ extends State
 @onready var sprite: AnimatedSprite2D = $"../../sprite"
 @onready var fsm: FiniteStateMachine = $".."
 
+var randomAction := [
+	"chase_player","spell"
+]
+
 const WALK_SPEED := 20.0
 
 var dir : int
@@ -20,3 +24,10 @@ func physics_update(delta: float)->void:
 	
 	if death_bringer.distanceToPlayer.x < 0 : death_bringer.flipDeathBringer(false)
 	elif death_bringer.distanceToPlayer.x > 0 : death_bringer.flipDeathBringer(true)
+	
+	#if abs(death_bringer.distanceToPlayer.x) > 40 :
+		##mungkin pakai persentase???
+		#var percent := randi_range(0,300)
+		#if percent < 3 :
+			#fsm.transition("spell")
+			#
